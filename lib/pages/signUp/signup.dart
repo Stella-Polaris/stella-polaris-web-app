@@ -1,10 +1,9 @@
-import 'dart:io';
-
 
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 
 import '../../custom widgets/models/users/user.dart';
-import 'account_info.dart';
+import '../../custom widgets/my_text_field.dart';
 
 
 
@@ -21,9 +20,6 @@ class _SignUpState extends State<SignUp> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController positionController = TextEditingController();
-  File? image;
-  Map<String, String> positions = {};
 
   final PageController pageController = PageController();
   int pageIndex = 0;
@@ -37,59 +33,24 @@ class _SignUpState extends State<SignUp> {
     emailController.dispose();
     passwordController.dispose();
     nameController.dispose();
-    positionController.dispose();
+
     pageController.dispose();
   }
 
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final List<Widget> pages = [
-      UserData(
-        emailController: emailController,
-        passwordController: passwordController,
-      ),
-    ];
 
-    // Function to navigate to the previous page
-    void goToPreviousPage() {
-      setState(() {
-        pageIndex--;
-        if (pageIndex != pages.length - 1) {
-          nextButton = 'Next';
-        }
-      });
-      pageController.previousPage(
-        duration: transitionTime,
-        curve: Curves.fastOutSlowIn,
-      );
-    }
-
-    void goToNextPage() {
-      bool formState = _formKey.currentState?.validate() ?? false;
-      if (formState) {
-        setState(() {
-          pageIndex++;
-          if (pageIndex == pages.length - 1) {
-            nextButton = 'Finish';
-          }
-        });
-
-        pageController.nextPage(
-            duration: transitionTime, curve: Curves.fastOutSlowIn);
-      }
-    }
 
     void validateForm() async {
       bool formState = _formKey.currentState?.validate() ?? false;
 
-      print(
-          "SignUp.dart: ${image?.path ?? 'Nada aun'}"); //test if image is received
+
       if (formState) {
         print("All fields are filled");
         // then get url and add it to player
-        AppUser player =
-            AppUser(name: nameController.text, position: positions);
+        AppUser user =
+            AppUser(name: nameController.text);
 
       }
 
@@ -107,36 +68,60 @@ class _SignUpState extends State<SignUp> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Spacer(),
-            Expanded(
-              child: Form(
-                key: _formKey,
-                child: PageView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: pageController,
-                  children: pages,
-                ),
-              ),
+            UserData(
+              emailController: emailController,
+              passwordController: passwordController,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                    onPressed: pageIndex >= 1 ? goToPreviousPage : null,
-                    child: const Text('Previous')),
-                const SizedBox(
-                  width: 20,
-                ),
-                ElevatedButton(
-                    onPressed: pageIndex != (pages.length - 1)
-                        ? goToNextPage
-                        : validateForm,
-                    child: Text(nextButton)),
-              ],
-            ),
-            const Spacer()
+            ElevatedButton(onPressed: (){
+              //call validator on the fields
+
+              //navigate to home
+              Navigator.of(context).pushReplacementNamed('/mainPage');
+
+            }, child: const Text("Register"))
           ],
-        ),
+        )
+      ),
+    );
+  }
+}
+
+
+class UserData extends StatefulWidget {
+  const UserData(
+      {super.key,
+        required this.emailController,
+        required this.passwordController});
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+
+  @override
+  State<UserData> createState() => _UserDataState();
+}
+
+class _UserDataState extends State<UserData> {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const Center(child: Text("Account Info")),
+          MyTextField(
+            hint: 'Email',
+            icon: Icons.email,
+            controller: widget.emailController,
+            validator:
+            ValidationBuilder().email("Please enter a valid email").build(),
+          ),
+          MyTextField(
+            hint: 'Password',
+            icon: Icons.lock,
+            obscureText: true,
+            controller: widget.passwordController,
+
+            // helperText: 'Password must be at least 6 characters',
+          ),
+        ],
       ),
     );
   }
