@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:stella_polaris/custom%20widgets/models/users/user.dart';
+import 'package:stella_polaris/custom%20widgets/models/user.dart';
 
 class Saved extends StatefulWidget {
   const Saved({super.key, required this.myUser});
@@ -13,21 +13,22 @@ class Saved extends StatefulWidget {
 class _SavedState extends State<Saved> {
 
 
-  List<Widget> listStatus(){
-
-    if(widget.myUser.visited == null){
-      return const [Text("No places saved yet")];
-    }else{
-      return widget.myUser.visited!.isEmpty?[const Text("No places saved yet")]:widget.myUser.visited!;
-
-    }
-
-  }
+  // List<Widget> listStatus(){
+  //
+  //   if(widget.myUser.visited == null){
+  //     return const [Text("No places saved yet")];
+  //   }else{
+  //     return widget.myUser.visited!.isEmpty?[const Text("No places saved yet")]:widget.myUser.visited!;
+  //
+  //   }
+  //
+  // }
   @override
   Widget build(BuildContext context) {
-    print(listStatus());
-    return ListView(
-      children: listStatus(),
-    );
+    //print(listStatus());
+    return Text("HERE");
+    //   ListView(
+    //   children: listStatus(),
+    // );
   }
 }

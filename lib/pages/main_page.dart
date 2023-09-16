@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:stella_polaris/custom%20widgets/models/place.dart';
 import 'package:stella_polaris/pages/popular_places.dart';
 import 'package:stella_polaris/pages/profile.dart';
 import 'package:stella_polaris/pages/saved.dart';
 
 import '../custom widgets/main_layout.dart';
-import '../custom widgets/models/users/user.dart';
+import '../custom widgets/models/user.dart';
 import 'discover.dart';
 
 class MainPage extends StatefulWidget {
@@ -15,13 +16,40 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  List<Widget> visited = [
-    Text("My home"),
-    Text("USA"),
-    Text("Everglades"),
-    Text("Church")
+  List<Place> visited = [
+    Place(
+        name: "My Home",
+        imageUrl: ["www.google.com", "www.amazon.com"],
+        description: ["search engine", 'online store'],
+        location: "here"),
+    Place(
+        name: "USA",
+        imageUrl: ["www.google.com", "www.amazon.com"],
+        description: ["search engine", 'online store'],
+        location: "here"),
+    Place(
+        name: "Everglades",
+        imageUrl: ["www.google.com", "www.amazon.com"],
+        description: ["search engine", 'online store'],
+        location: "here"),
+    Place(
+        name: "Church",
+        imageUrl: ["www.google.com", "www.amazon.com"],
+        description: ["search engine", 'online store'],
+        location: "here"),
   ];
-  List<Widget> saved = [Text("Florida"), Text("FIU")];
+  List<Place> saved = [
+    Place(
+        name: "Florida",
+        imageUrl: ["www.google.com", "www.amazon.com"],
+        description: ["search engine", 'online store'],
+        location: "here"),
+    Place(
+        name: "FIU",
+        imageUrl: ["www.google.com", "www.amazon.com"],
+        description: ["search engine", 'online store'],
+        location: "here"),
+  ];
 
   NavigationRailLabelType labelType = NavigationRailLabelType.all;
   int _selectedIndex = 0;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stella_polaris/custom%20widgets/models/users/user.dart';
+import 'package:stella_polaris/custom%20widgets/models/place.dart';
+import 'package:stella_polaris/custom%20widgets/models/user.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key, required this.myUser});
@@ -27,7 +28,8 @@ class _ProfileState extends State<Profile> {
       }
       return status;
     }
-    return  Card(
+
+    return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -65,15 +67,33 @@ class _ProfileState extends State<Profile> {
               style: TextStyle(fontSize: 30),
             ),
             Flexible(
+                child: listStatus()
+                    ? ListView.builder(
+                        itemCount: widget.myUser.visited!.length,
+                        itemBuilder: (buildContext, index) {
+                          return PlaceItem(placeData: widget.myUser.visited![index]);
 
-                child: ListView(
-
-                  children: listStatus()
-                      ? widget.myUser.visited!
-                      : [Text("No places visited yet")],
-                ))
+                        })
+                    : Text("No places visited"))
           ],
         ),
+      ),
+    );
+  }
+}
+
+class PlaceItem extends StatelessWidget {
+  const PlaceItem({super.key, required this.placeData});
+  final Place placeData;
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(placeData.name),
+          Text(placeData.location),
+        ],
       ),
     );
   }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:stella_polaris/custom%20widgets/models/place.dart';
 
 class UserModel {
   String firstName;
   String lastName;
-  List<Widget>? visited; //TODO CHANGE WIDGET TO SPECIFIC PLACE OBJECT TYPE
-  List<Widget>? saved;
+  List<Place>? visited; //TODO CHANGE WIDGET TO SPECIFIC PLACE OBJECT TYPE
+  List<Place>? saved;
   UserModel(
       {required this.firstName,
       required this.lastName,

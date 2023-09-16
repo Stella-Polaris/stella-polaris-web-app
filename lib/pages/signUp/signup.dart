@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 
-import '../../custom widgets/models/users/user.dart';
+import '../../custom widgets/models/user.dart';
 import '../../custom widgets/my_text_field.dart';
 
 
