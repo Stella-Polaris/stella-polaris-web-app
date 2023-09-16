@@ -51,8 +51,8 @@ class _SignUpState extends State<SignUp> {
       if (formState) {
         print("All fields are filled");
         // then get url and add it to player
-        AppUser user =
-            AppUser(firstName: firstNameController.text, lastName: lastNameController.text );
+        UserModel user =
+            UserModel(firstName: firstNameController.text, lastName: lastNameController.text );
 
       }
 

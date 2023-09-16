@@ -15,7 +15,13 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  List<Widget> visited = [Text("My home"), Text("USA"), Text("Everglades"), Text("Church")];
+  List<Widget> visited = [
+    Text("My home"),
+    Text("USA"),
+    Text("Everglades"),
+    Text("Church")
+  ];
+  List<Widget> saved = [Text("Florida"), Text("FIU")];
 
   NavigationRailLabelType labelType = NavigationRailLabelType.all;
   int _selectedIndex = 0;
@@ -27,11 +33,12 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    AppUser myUser = AppUser(firstName: 'Carlos', lastName: 'Zafon', visited: visited,);
+    UserModel myUser = UserModel(
+        firstName: 'Carlos', lastName: 'Zafon', visited: visited, saved: saved);
     List<Widget> pages = [
       const Discover(),
       const PopularPlaces(),
-       Saved( user: myUser,),
+      Saved(myUser: myUser),
       Profile(
         myUser: myUser,
       ),
